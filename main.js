@@ -38,6 +38,16 @@ define(function (require, exports, module) {
             return false;
         }
         
-        return !name.match(/node_modules/);
+        const EXCLUDE_PATH = [
+            'node_modules', //for node.js
+            'Library\/[a-zA-Z_\-]*Cache', //for Unity3D
+            'Library\/metadata', //for Unity3D
+            'Library\/ScriptAssemblies', //for Unity3D
+            'Temp\/ProcessJobs', //for Unity3D
+            '\.meta', //for Unity3D
+            '\.asset', //for Unity3D
+        ]
+        
+        return !path.match(new RegExp(EXCLUDE_PATH.join('|')));
     };
 });
